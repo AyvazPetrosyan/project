@@ -1,11 +1,12 @@
 <?php
 $URL = $_SERVER['REQUEST_URI'];
-$URL_ELEMENTS_LIST = explode("/", $URL);
+$PROJECT_NAME = 'PROJECT';
+$URL_ELEMENTS_LIST = generateUrl($PROJECT_NAME, explode("/", $URL));
 
 if(empty($sqlConfig)) {
-    $URL_ELEMENTS_LIST[2] = 'frontend';
-    $URL_ELEMENTS_LIST[3] = 'Install';
-    $URL_ELEMENTS_LIST[4] = 'sqlConnectToDb';
+    $URL_ELEMENTS_LIST[1] = 'frontend';
+    $URL_ELEMENTS_LIST[2] = 'Install';
+    $URL_ELEMENTS_LIST[3] = 'sqlConnectToDb';
 } else {
     /*$connect = new \bundle\Connect($sqlConfig);
     $sqlConnectToDb = $connect->sqlConnectToDb;*/
@@ -14,30 +15,30 @@ if(empty($sqlConfig)) {
 $URL_INFO = array();
 
 /*module name*/
-if(empty($URL_ELEMENTS_LIST[2]) || $URL_ELEMENTS_LIST[2]==NULL)
+if(empty($URL_ELEMENTS_LIST[1]) || $URL_ELEMENTS_LIST[1]==NULL)
     $URL_INFO["moduleName"] = "frontend";
 else
-    $URL_INFO["moduleName"] =  $URL_ELEMENTS_LIST[2];
+    $URL_INFO["moduleName"] =  $URL_ELEMENTS_LIST[1];
 
 /*controller name*/
-if(empty($URL_ELEMENTS_LIST[3]) || $URL_ELEMENTS_LIST[3]==NULL)
+if(empty($URL_ELEMENTS_LIST[2]) || $URL_ELEMENTS_LIST[2]==NULL)
     $URL_INFO["controllerName"] = "Index";
 else
-    $URL_INFO["controllerName"] =  $URL_ELEMENTS_LIST[3];
+    $URL_INFO["controllerName"] =  $URL_ELEMENTS_LIST[2];
 
 /*action name*/
-if(empty($URL_ELEMENTS_LIST[4]) || $URL_ELEMENTS_LIST[4]==NULL)
+if(empty($URL_ELEMENTS_LIST[3]) || $URL_ELEMENTS_LIST[3]==NULL)
     $URL_INFO["actionName"] = "indexAction";
 else
-    $URL_INFO["actionName"] =  $URL_ELEMENTS_LIST[4]."Action";
+    $URL_INFO["actionName"] =  $URL_ELEMENTS_LIST[3]."Action";
 
 /*param name*/
-if(empty($URL_ELEMENTS_LIST[5]) || $URL_ELEMENTS_LIST[5]==NULL)
-    $URL_ELEMENTS_LIST[5] = "";
+if(empty($URL_ELEMENTS_LIST[4]) || $URL_ELEMENTS_LIST[4]==NULL)
+    $URL_ELEMENTS_LIST[4] = "";
 
 /*param value*/
-if(empty($URL_ELEMENTS_LIST[6]) || $URL_ELEMENTS_LIST[6]==NULL)
-    $URL_ELEMENTS_LIST[6] = "";
+if(empty($URL_ELEMENTS_LIST[5]) || $URL_ELEMENTS_LIST[5]==NULL)
+    $URL_ELEMENTS_LIST[5] = "";
 
 $PROJECT_INFO = array();
 $PROJECT_INFO["host"] = gethostname();
@@ -48,11 +49,31 @@ $PROJECT_INFO['actionName'] = $URL_INFO["actionName"];
 $PROJECT_INFO['sqlConfig'] = $sqlConfig;
 $PROJECT_INFO['params']['post']=$_POST;
 $PROJECT_INFO['params']['get']=$_GET;
-$PROJECT_INFO['params'][$URL_ELEMENTS_LIST[5]]=$URL_ELEMENTS_LIST[6];
+$PROJECT_INFO['params'][$URL_ELEMENTS_LIST[4]]=$URL_ELEMENTS_LIST[5];
 
 session_start();
 
 $Router = new Router($PROJECT_INFO, $URL_INFO);
+
+function generateUrl($projectName, $requestedUrlElementList = []){
+    $generatedUrlElementList[] = $projectName;
+    if(empty($requestedUrlElementList)) {
+        return $requestedUrlElementList;
+    }
+
+    foreach ($requestedUrlElementList as $urlElementKey=>$urlElement){
+        if($urlElement=='frontend' || $urlElement=='admin'){
+            break;
+        }
+        unset($requestedUrlElementList[$urlElementKey]);
+    }
+
+    foreach($requestedUrlElementList as $urlElement){
+        $generatedUrlElementList[] = $urlElement;
+    }
+
+    return $generatedUrlElementList;
+}
 
 
 class Router {
