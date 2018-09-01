@@ -17,6 +17,8 @@ require_once 'module/engine/Bundel.php';
 require_once 'bundle/Connect.php';
 require_once 'bundle/TablesGenerator.php';
 require_once 'bundle/Query.php';
+require_once 'bundle/htmlFormBundle/Form.php';
+require_once  'bundle/htmlTableBundle/HtmlTable.php';
 
 /* models */
 require_once 'models/ParentModel.php';

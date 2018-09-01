@@ -42,7 +42,7 @@ if(empty($URL_ELEMENTS_LIST[5]) || $URL_ELEMENTS_LIST[5]==NULL)
 
 $PROJECT_INFO = array();
 $PROJECT_INFO["host"] = gethostname();
-$PROJECT_INFO["rootDir"] = "project";
+$PROJECT_INFO["rootDir"] = "github/project";
 $PROJECT_INFO['moduleName'] = $URL_INFO['moduleName'];
 $PROJECT_INFO['controllerName'] = $URL_INFO["controllerName"];
 $PROJECT_INFO['actionName'] = $URL_INFO["actionName"];
