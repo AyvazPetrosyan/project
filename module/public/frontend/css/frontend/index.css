@@ -1,0 +1,102 @@
+.start-game-block{
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    width: 400px;
+    height: 500px;
+    background-color: darkgray;
+}
+.start-game-link{
+    background-color: green;
+    color: white;
+    position: absolute;
+    left: 150px;
+    bottom: 10px;
+    padding: 15px;
+    text-decoration: none;
+}
+.action-index{
+    position: absolute;
+    left: 10px;
+    top: 0px;
+    width: 98%;
+    height: 800px;
+}
+.question-info-block{
+    position: absolute;
+    left: 100px;
+    top: 100px;
+    width: 800px;
+    height: 390px;
+}
+.question--block{
+    background-color: #EEEEEE;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 98%;
+    height: 54px;
+    border: 1px solid black;
+    text-align: center;
+}
+.answers--block{
+    background-color: #EEEEEE;
+    position: absolute;
+    left: 5px;
+    top: 70px;
+    width: 93%;
+    height: 320px;
+    margin: 0px;
+    border: 1px solid black;
+}
+.answer-block{
+    border: 1px solid black;
+    padding: 10px 0px 10px 23px;
+    margin: 10px 50px 0px 0px;
+}
+.answer-block.is-active:hover{
+    background-color: #FFFFFF;
+}
+.next-question-link{
+    background-color: green;
+    color: white;
+    position: absolute;
+    left: 200px;
+    bottom: 10px;
+    padding: 15px;
+    text-decoration: none;
+}
+.new-game-link{
+    background-color: green;
+    color: white;
+    position: absolute;
+    left: 400px;
+    bottom: 10px;
+    padding: 15px;
+    text-decoration: none;
+}
+.game-round {
+    position: absolute;
+    left: 475px;
+    top: 13px;
+    background-color: green;
+    color: wheat;
+    padding: 20px;
+    border-radius: 61px;
+    font-size: x-large;
+}
+.install-form-block{position: absolute;
+    left: 300px;
+    top: 92px;
+    background-color: darkgray;
+    padding: 10px;
+}
+.install-form-block ul{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+}
+.install-form-block ul li{
+    margin-bottom: 8px;
+}
