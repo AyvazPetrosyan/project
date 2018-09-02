@@ -1,6 +1,6 @@
 <div class="menu-tree">
     <?php
-        $menuTreeList = $this->controllerParams['senderDetailMenuTree'];
+        $menuTreeList = $this->controllerParams['senderDetailMenuTreeList'];
         $menuTree = new \bundle\menuTree\MenuTree($menuTreeList);
         $menuTree->printMenuTree();
     ?>

@@ -13,7 +13,7 @@ class SenderDetail extends ParentController{
 
         $rootDir = $this->projectInfo['rootDir'];
         $menuTree = new MenuTreeGenerator($rootDir);
-        $this->assignParams['senderDetailMenuTree'] = $menuTree->generateSendersDetailMenuTreeList();
+        $this->assignParams['senderDetailMenuTreeList'] = $menuTree->generateSendersDetailMenuTreeList();
 
         new ViewManager($this->assignParams);
     }
@@ -22,9 +22,14 @@ class SenderDetail extends ParentController{
     {
         $this->assignParams['viewPath'] = 'sender_detail/breads.php';
 
+        $this->assignParams['breadsTableInfo'] = [
+            ['value-1', 'value-2', 'value-n'],
+            ['value-1', 'value-2', 'value-n'],
+        ];
+
         $rootDir = $this->projectInfo['rootDir'];
         $menuTree = new MenuTreeGenerator($rootDir);
-        $this->assignParams['senderDetailMenuTree'] = $menuTree->generateSendersDetailMenuTreeList();
+        $this->assignParams['senderDetailMenuTreeList'] = $menuTree->generateSendersDetailMenuTreeList();
 
         new ViewManager($this->assignParams);
     }
