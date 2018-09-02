@@ -75,8 +75,7 @@ function generateUrl($projectName, $requestedUrlElementList = []){
     return $generatedUrlElementList;
 }
 
-
-class Router {
+class Router extends \engine\Project {
 
     private $moduleName = 'frontend';
 

@@ -16,7 +16,7 @@ class ParentController extends Project {
         $this->assignParams['moduleName'] = $projectInfo['moduleName'];
 
         $rootDir = $projectInfo['rootDir'];
-        $this->assignParams['menuList'] = [
+        $this->assignParams['topBarMenuTree'] = [
             'main'=>['menu'=>FALSE, 'href'=>"/$rootDir/admin", 'name'=>'Գլխավոր'],
             'settings'=>[
                 'menu'=>TRUE,

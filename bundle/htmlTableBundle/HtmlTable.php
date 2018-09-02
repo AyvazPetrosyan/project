@@ -65,6 +65,9 @@ class HtmlTable {
                                 echo "<span class='info-value'>$infoVal</span>";
                             echo "</th>";
                         }
+                        if($this->isDynamic){
+                            echo "<th>ջնջել</th>";
+                        }
                     echo "</tr>";
                 } else {
                     echo "<tr style='$border'>";

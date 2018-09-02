@@ -18,7 +18,9 @@ require_once 'bundle/Connect.php';
 require_once 'bundle/TablesGenerator.php';
 require_once 'bundle/Query.php';
 require_once 'bundle/htmlFormBundle/Form.php';
-require_once  'bundle/htmlTableBundle/HtmlTable.php';
+require_once 'bundle/htmlTableBundle/HtmlTable.php';
+require_once 'bundle/menuTreeBundle/MenuTree.php';
+require_once 'bundle/menuTreeBundle/MenuTreeGenerator.php';
 
 /* models */
 require_once 'models/ParentModel.php';

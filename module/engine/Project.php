@@ -11,7 +11,8 @@ abstract class Project {
     public function customDebug($param)
     {
         echo '<pre>';
-        print_r($param);
+            print_r($param);
+        echo '</pre>';
         die();
     }
 }
