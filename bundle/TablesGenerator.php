@@ -25,6 +25,13 @@ class TablesGenerator extends Project {
             'order_number VARCHAR(20)',
             'name VARCHAR(20)',
             'PRIMARY KEY(id)'
+        ],
+
+        'senders_breads_relation'=>[
+            'id INT(5) NOT NULL AUTO_INCREMENT',
+            'sender_id INT(5)',
+            'bread_id INT(5)',
+            'PRIMARY KEY(id)'
         ]
     ];
 

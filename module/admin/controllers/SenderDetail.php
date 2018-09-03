@@ -23,8 +23,8 @@ class SenderDetail extends ParentController{
         $this->assignParams['viewPath'] = 'sender_detail/breads.php';
 
         $this->assignParams['breadsTableInfo'] = [
-            ['value-1', 'value-2', 'value-n'],
-            ['value-1', 'value-2', 'value-n'],
+            ['name', 'price'],
+            ['value-1', 'value-2'],
         ];
 
         $rootDir = $this->projectInfo['rootDir'];
@@ -32,6 +32,20 @@ class SenderDetail extends ParentController{
         $this->assignParams['senderDetailMenuTreeList'] = $menuTree->generateSendersDetailMenuTreeList();
 
         new ViewManager($this->assignParams);
+    }
+
+    public function addBreadAction()
+    {
+        $sqlConfig = $this->projectInfo['sqlConfig'];
+        $breadName = $this->projectInfo['params']['post']['breadName'];
+        $breadPrice = $this->projectInfo['params']['post']['breadPrice'];
+
+        $query = new Query($sqlConfig);
+        $query->addIntoTable('senders',[
+            'name'=>$breadName
+        ]);
+
+        $this->redirectToController('admin', 'SenderDetail', 'breadsAction');
     }
 
     public function historyAction()
