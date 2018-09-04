@@ -33,6 +33,8 @@ class SenderDetail extends ParentController{
         $menuTree = new MenuTreeGenerator($rootDir);
         $this->assignParams['senderDetailMenuTreeList'] = $menuTree->generateSendersDetailMenuTreeList();
 
+        $this->assignParams['breadsTableForm'] = $this->generateBreadsTableForm();
+
         new ViewManager($this->assignParams);
     }
 
@@ -58,5 +60,29 @@ class SenderDetail extends ParentController{
     public function senderAction()
     {
         $this->redirectToController('admin', 'SenderDetail');
+    }
+
+    private function generateBreadsTableForm()
+    {
+        $this->getBreads();
+        $tableInfo = $this->assignParams['breadsTableInfo'];
+        $tableForm = "<form method='post' action=''>";
+        foreach ($tableInfo[0] as $infoKey => $infoVal) {
+            if($infoKey == 0) {
+                $tableForm .= "<td><select type='text' name=$infoKey.'_name' placeholder='$infoVal' required='required'></select></td>";
+            } else {
+                $tableForm .= "<td><input type='text' name=$infoKey.'_name' placeholder='$infoVal' required='required'></td>";
+            }
+        }
+        $tableForm .= "<td><button type='submit' >ավելացնել</button></td>";
+        $tableForm .= "</form>";
+
+        return $tableForm;
+    }
+
+    private function getBreads()
+    {
+        $bread = new \bundle\breadBundle\Bread($this->projectInfo['sqlConfig']);
+        $bread->getBreads();
     }
 }

@@ -57,7 +57,7 @@ class HtmlTable {
                                 echo "<span class='info-value'>$infoVal</span>";
                             echo "</th>";
                         }
-                        if($this->isDynamic){
+                        if($this->isDynamic || !empty($this->tableForm)){
                             echo "<th>ջնջել</th>";
                         }
                     echo "</tr>";
@@ -68,13 +68,13 @@ class HtmlTable {
                                 echo "<span class='info-value'>$infoVal</span>";
                             echo "</td>";
                         }
-                        if($this->isDynamic){
+                        if($this->isDynamic || !empty($this->tableForm)){
                             echo "<td><a href=''>ջնջել</a></td>";
                         }
                     echo "</tr>";
                 }
             }
-            if($this->isDynamic){
+            if($this->isDynamic || !empty($this->tableForm)){
                 $action = $this->formAction;
                 $method = $this->formMethod;
                 echo "<tr>";

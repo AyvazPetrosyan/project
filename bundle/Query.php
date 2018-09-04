@@ -15,6 +15,7 @@ class Query extends Bundle{
 
 	public function getAllFromTAble($tableName)
 	{
+        $resultList = [];
 		$sqlConnectToDb = $this->connect->sqlConnectToDb;
 		$queryString = "SELECT * FROM $tableName";
 		$queryResult = mysqli_query($sqlConnectToDb, $queryString);
@@ -22,7 +23,7 @@ class Query extends Bundle{
 			$resultList[] = $result;
 		}
 
-		return $queryResult;
+		return $resultList;
 	}
 
 	/*

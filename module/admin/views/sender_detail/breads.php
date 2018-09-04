@@ -10,6 +10,7 @@
         if(isset($this->controllerParams['breadsTableInfo'])) {
             $tableInfo = $this->controllerParams['breadsTableInfo'];
             $htmlTable = new \bundle\htmlTableBundle\HtmlTable('table table-hover', $tableInfo);
+            $htmlTable->tableForm = $this->controllerParams['breadsTableForm'];
             $htmlTable->printTable();
         } else {
             echo "breads table is empty";

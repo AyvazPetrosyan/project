@@ -21,6 +21,7 @@ require_once 'bundle/htmlFormBundle/Form.php';
 require_once 'bundle/htmlTableBundle/HtmlTable.php';
 require_once 'bundle/menuTreeBundle/MenuTree.php';
 require_once 'bundle/menuTreeBundle/MenuTreeGenerator.php';
+require_once 'bundle/breadBundle/Bread.php';
 
 /* models */
 require_once 'models/ParentModel.php';
