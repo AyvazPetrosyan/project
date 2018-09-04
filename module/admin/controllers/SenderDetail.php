@@ -66,10 +66,18 @@ class SenderDetail extends ParentController{
     {
         $this->getBreads();
         $tableInfo = $this->assignParams['breadsTableInfo'];
+        $breads = $this->getBreads();
         $tableForm = "<form method='post' action=''>";
         foreach ($tableInfo[0] as $infoKey => $infoVal) {
-            if($infoKey == 0) {
-                $tableForm .= "<td><select type='text' name=$infoKey.'_name' placeholder='$infoVal' required='required'></select></td>";
+            if($infoVal == 'name') {
+                $tableForm .= "<td><select type='text' name=$infoKey.'_name' placeholder='$infoVal' required='required'>";
+                foreach ($breads as $breadKey=>$breadValue){
+                    $breadName = $breadValue['name'];
+                    $tableForm .= "<option value=$breadKey>$breadName</option>";
+                }
+                $tableForm .= "</select></td>";
+            } elseif($infoVal == 'price') {
+                $tableForm .= "<td><input type='number' min='10' name=$infoKey.'_name' placeholder='$infoVal' required='required'></td>";
             } else {
                 $tableForm .= "<td><input type='text' name=$infoKey.'_name' placeholder='$infoVal' required='required'></td>";
             }
@@ -83,6 +91,8 @@ class SenderDetail extends ParentController{
     private function getBreads()
     {
         $bread = new \bundle\breadBundle\Bread($this->projectInfo['sqlConfig']);
-        $bread->getBreads();
+        $breads = $bread->getBreads();
+
+        return $breads;
     }
 }

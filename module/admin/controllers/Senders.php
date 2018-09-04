@@ -1,7 +1,6 @@
 <?php
 namespace admin\controllers;
 
-use bundle\Connect;
 use bundle\Query;
 use engine\ParentController;
 use engine\ViewManager;
@@ -56,10 +55,5 @@ class Senders extends ParentController{
         }
 
         return $senders;
-    }
-
-    private function generateSenderOrderNumber()
-    {
-
     }
 }
