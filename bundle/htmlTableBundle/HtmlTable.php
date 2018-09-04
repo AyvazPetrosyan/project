@@ -21,26 +21,25 @@ class HtmlTable {
 
     private $tableClass = '';
 
-    private $tableInfoList = [
-
-    ];
+    private $tableInfoList = [];
 
     private $formAction = '';
 
-    public $tableStyleList = [
+    private $formMethod = '';
 
-    ];
-
-    public $hasBorder = true;
+    public $tableStyleList = [];
 
     public $isDynamic = false;
 
-    public function __construct($tableClass, $tableInfoList, $formAction='')
+    public $tableForm = NULL;
+
+    public function __construct($tableClass, $tableInfoList, $formAction='', $formMethod='post')
     {
         $this->tableClass = $tableClass;
         $this->tableInfoList = $tableInfoList;
         if($this->isDynamic){
             $this->formAction = $formAction;
+            $this->formMethod = $formMethod;
         }
     }
 
@@ -48,20 +47,13 @@ class HtmlTable {
     {
         $class = $this->tableClass;
         $tableInfo = $this->tableInfoList;
-        $styleText = $this->generateStyleText();
-        $hasBorder = $this->hasBorder;
 
-        $border = '';
-        if($hasBorder){
-            $border = "border: 1px solid black;";
-        }
-
-        echo "<table class='$class' style='$styleText' >";
+        echo "<table class='$class' >";
             foreach ($tableInfo as $infoListKey=>$infoList) {
                 if($infoListKey == 0){
-                    echo "<tr style='$border'>";
+                    echo "<tr>";
                         foreach ($infoList as $infoKey=>$infoVal){
-                            echo "<th style='$border'>";
+                            echo "<th>";
                                 echo "<span class='info-value'>$infoVal</span>";
                             echo "</th>";
                         }
@@ -70,9 +62,9 @@ class HtmlTable {
                         }
                     echo "</tr>";
                 } else {
-                    echo "<tr style='$border'>";
+                    echo "<tr>";
                         foreach ($infoList as $infoKey=>$infoVal){
-                            echo "<td style='$border'>";
+                            echo "<td>";
                                 echo "<span class='info-value'>$infoVal</span>";
                             echo "</td>";
                         }
@@ -84,29 +76,20 @@ class HtmlTable {
             }
             if($this->isDynamic){
                 $action = $this->formAction;
+                $method = $this->formMethod;
                 echo "<tr>";
-                    echo "<form method='post' action='$action'>";
-                        foreach ($tableInfo[0] as $infoKey=>$infoVal) {
+                    if(empty($this->tableForm)) {
+                        echo "<form method='$method' action='$action'>";
+                            foreach ($tableInfo[0] as $infoKey => $infoVal) {
                                 echo "<td><input type='text' name=$infoKey.'_name' placeholder='$infoVal' required='required'></td>";
-                        }
-                        echo "<td><button type='submit' >ավելացնել</button></td>";
-                    echo "</form>";
+                            }
+                            echo "<td><button type='submit' >ավելացնել</button></td>";
+                        echo "</form>";
+                    } else {
+                        echo $this->tableForm;
+                    }
                 echo "</tr>";
             }
         echo "</table>";
-    }
-
-    private function generateStyleText()
-    {
-        $styleText = '';
-        $tableStyleList = $this->tableStyleList;
-
-        if(count($tableStyleList)>0) {
-            foreach ($tableStyleList as $optsName => $optsVal) {
-                $styleText .= "$optsName: $optsVal; ";
-            }
-        }
-
-        return $styleText;
     }
 }

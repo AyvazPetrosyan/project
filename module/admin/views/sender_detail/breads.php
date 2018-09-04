@@ -10,7 +10,6 @@
         if(isset($this->controllerParams['breadsTableInfo'])) {
             $tableInfo = $this->controllerParams['breadsTableInfo'];
             $htmlTable = new \bundle\htmlTableBundle\HtmlTable('table table-hover', $tableInfo);
-            $htmlTable->isDynamic = true;
             $htmlTable->printTable();
         } else {
             echo "breads table is empty";

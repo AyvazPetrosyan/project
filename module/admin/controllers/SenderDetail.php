@@ -25,6 +25,8 @@ class SenderDetail extends ParentController{
         $this->assignParams['breadsTableInfo'] = [
             ['name', 'price'],
             ['value-1', 'value-2'],
+            ['value-1', 'value-2'],
+            ['value-1', 'value-2'],
         ];
 
         $rootDir = $this->projectInfo['rootDir'];
@@ -37,7 +39,7 @@ class SenderDetail extends ParentController{
     public function addBreadAction()
     {
         $sqlConfig = $this->projectInfo['sqlConfig'];
-        $breadName = $this->projectInfo['params']['post']['breadName'];
+        $breadName  = $this->projectInfo['params']['post']['breadName'];
         $breadPrice = $this->projectInfo['params']['post']['breadPrice'];
 
         $query = new Query($sqlConfig);
