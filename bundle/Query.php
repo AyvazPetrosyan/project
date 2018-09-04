@@ -13,7 +13,7 @@ class Query extends Bundle{
 		$this->connect = new Connect($sqlConfig);
 	}
 
-	public function getAllFromTAble($tableName)
+	public function getAllFromTable($tableName)
 	{
         $resultList = [];
 		$sqlConnectToDb = $this->connect->sqlConnectToDb;

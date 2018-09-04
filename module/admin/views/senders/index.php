@@ -18,7 +18,7 @@
                     $id = $sender['id'];
                     $name = $sender['name'];
                     echo "<tr>";
-                        echo "<td><a href='/$this->rootDir/admin/SenderDetail' >$name</a></td>";
+                        echo "<td><a href='/$this->rootDir/admin/SenderDetail/index/id/$id' >$name</a></td>";
                         echo "<td><a href='/$this->rootDir/admin/Senders/deleteSender/id/$id'>ջնջել</a></td>";
                     echo "</tr>";
                 }

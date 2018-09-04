@@ -2,6 +2,7 @@
 namespace admin\controllers;
 
 use bundle\menuTreeBundle\MenuTreeGenerator;
+use bundle\senderBundle\Sender;
 use engine\ParentController;
 use engine\ViewManager;
 
@@ -14,6 +15,13 @@ class SenderDetail extends ParentController{
         $rootDir = $this->projectInfo['rootDir'];
         $menuTree = new MenuTreeGenerator($rootDir);
         $this->assignParams['senderDetailMenuTreeList'] = $menuTree->generateSendersDetailMenuTreeList();
+
+        $sqlConfig = $this->projectInfo['sqlConfig'];
+        $senderId = $this->projectInfo['params']['id'];
+        $sender = new Sender($sqlConfig);
+        $sender = $sender->getSenderById($senderId);
+
+        $this->assignParams['senderInfo'] = $sender;
 
         new ViewManager($this->assignParams);
     }
