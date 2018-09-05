@@ -31,6 +31,7 @@ class TablesGenerator extends Project {
             'id INT(5) NOT NULL AUTO_INCREMENT',
             'sender_id INT(5)',
             'bread_id INT(5)',
+            'price int(5)',
             'PRIMARY KEY(id)'
         ]
     ];

@@ -2,6 +2,7 @@
 namespace admin\controllers;
 
 use bundle\menuTreeBundle\MenuTreeGenerator;
+use bundle\Query;
 use bundle\senderBundle\Sender;
 use engine\ParentController;
 use engine\ViewManager;
@@ -14,13 +15,13 @@ class SenderDetail extends ParentController{
 
         $rootDir = $this->projectInfo['rootDir'];
         $menuTree = new MenuTreeGenerator($rootDir);
-        $this->assignParams['senderDetailMenuTreeList'] = $menuTree->generateSendersDetailMenuTreeList();
 
         $sqlConfig = $this->projectInfo['sqlConfig'];
         $senderId = $this->projectInfo['params']['id'];
         $sender = new Sender($sqlConfig);
         $sender = $sender->getSenderById($senderId);
 
+        $this->assignParams['senderDetailMenuTreeList'] = $menuTree->generateSendersDetailMenuTreeList($senderId);
         $this->assignParams['senderInfo'] = $sender;
 
         new ViewManager($this->assignParams);
@@ -39,7 +40,8 @@ class SenderDetail extends ParentController{
 
         $rootDir = $this->projectInfo['rootDir'];
         $menuTree = new MenuTreeGenerator($rootDir);
-        $this->assignParams['senderDetailMenuTreeList'] = $menuTree->generateSendersDetailMenuTreeList();
+        $senderId = $this->projectInfo['params']['id'];
+        $this->assignParams['senderDetailMenuTreeList'] = $menuTree->generateSendersDetailMenuTreeList($senderId);
 
         $this->assignParams['breadsTableForm'] = $this->generateBreadsTableForm();
 
@@ -48,16 +50,21 @@ class SenderDetail extends ParentController{
 
     public function addBreadAction()
     {
-        $sqlConfig = $this->projectInfo['sqlConfig'];
-        $breadName  = $this->projectInfo['params']['post']['breadName'];
+        $sqlConfig  = $this->projectInfo['sqlConfig'];
+        $senderId = $this->projectInfo['params']['id'];
+        $breadId  = $this->projectInfo['params']['post']['breadId'];
         $breadPrice = $this->projectInfo['params']['post']['breadPrice'];
 
-        $query = new Query($sqlConfig);
-        $query->addIntoTable('senders',[
-            'name'=>$breadName
-        ]);
+        $insertList = [
+            'sender_id' => $senderId,
+            'bread_id' => $breadId,
+            'price' => $breadPrice
+        ];
 
-        $this->redirectToController('admin', 'SenderDetail', 'breadsAction');
+        $query = new Query($sqlConfig);
+        $query->addIntoTable('senders_breads_relation',$insertList);
+
+//        $this->redirectToController('admin', 'SenderDetail', 'breads');
     }
 
     public function historyAction()
@@ -72,20 +79,20 @@ class SenderDetail extends ParentController{
 
     private function generateBreadsTableForm()
     {
-        $this->getBreads();
         $tableInfo = $this->assignParams['breadsTableInfo'];
         $breads = $this->getBreads();
-        $tableForm = "<form method='post' action=''>";
+        $tableForm = "<form method='post' action='addBread'>";
         foreach ($tableInfo[0] as $infoKey => $infoVal) {
             if($infoVal == 'name') {
-                $tableForm .= "<td><select type='text' name=$infoKey.'_name' placeholder='$infoVal' required='required'>";
+                $tableForm .= "<td><select type='text' name='breadId' placeholder='$infoVal' required='required'>";
                 foreach ($breads as $breadKey=>$breadValue){
+                    $breadId = $breadValue['id'];
                     $breadName = $breadValue['name'];
-                    $tableForm .= "<option value=$breadKey>$breadName</option>";
+                    $tableForm .= "<option value=$breadId>$breadName</option>";
                 }
                 $tableForm .= "</select></td>";
             } elseif($infoVal == 'price') {
-                $tableForm .= "<td><input type='number' min='10' name=$infoKey.'_name' placeholder='$infoVal' required='required'></td>";
+                $tableForm .= "<td><input type='number' min='10' name='breadPrice' placeholder='$infoVal' required='required'></td>";
             } else {
                 $tableForm .= "<td><input type='text' name=$infoKey.'_name' placeholder='$infoVal' required='required'></td>";
             }

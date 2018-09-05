@@ -48,7 +48,7 @@ class Query extends Bundle{
 	}
 
 	/*
-		$tabelName = 'table name'
+		$tableName = 'table name'
 		$insertList = [
 			'columnName' => 'column value'
 		]
