@@ -103,6 +103,7 @@ class SenderDetail extends ParentController{
         $tableForm .= "</form>";
 
         return $tableForm;
+
     }
 
     private function getBreads()
