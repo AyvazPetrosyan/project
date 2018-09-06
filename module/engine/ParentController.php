@@ -34,10 +34,10 @@ class ParentController extends Project {
         ];
     }
 
-    protected function redirectToController($moduleName='frontend', $controllerName='Index', $actionName="index")
+    protected function redirectToController($moduleName='frontend', $controllerName='Index', $actionName="index", $paramKey=null, $paramVal=null)
     {
         $rootDir = $this->projectInfo['rootDir'];
-        $url = "$rootDir/$moduleName/$controllerName/$actionName";
+        $url = "$rootDir/$moduleName/$controllerName/$actionName/$paramKey/$paramVal";
         header("Location: /$url");
     }
 }

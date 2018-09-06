@@ -1,5 +1,5 @@
 <?php
-namespace bundle\menuTree;
+namespace bundle\menuTreeBundle;
 
 use engine\Bundle;
 

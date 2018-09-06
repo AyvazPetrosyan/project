@@ -69,7 +69,8 @@ class SenderDetail extends ParentController{
 
     public function historyAction()
     {
-        $this->redirectToController('admin', 'SenderDetail');
+        $senderId = $this->projectInfo['params']['id'];
+        $this->redirectToController('admin', 'SenderDetail','index','id', $senderId);
     }
 
     public function senderAction()
@@ -79,9 +80,10 @@ class SenderDetail extends ParentController{
 
     private function generateBreadsTableForm()
     {
+        $rootDir = $this->projectInfo['rootDir'];
         $tableInfo = $this->assignParams['breadsTableInfo'];
         $breads = $this->getBreads();
-        $tableForm = "<form method='post' action='addBread'>";
+        $tableForm = "<form method='post' action='/$rootDir/admin/SenderDetail/addBread'>";
         foreach ($tableInfo[0] as $infoKey => $infoVal) {
             if($infoVal == 'name') {
                 $tableForm .= "<td><select type='text' name='breadId' placeholder='$infoVal' required='required'>";
