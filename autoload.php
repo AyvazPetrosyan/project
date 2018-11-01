@@ -38,9 +38,11 @@ require_once 'module/admin/controllers/Bread.php';
 /* admin views */
 
 /* frontend controllers */
-// require_once 'module/frontend/controllers/Index.php';
 
 /* frontend views */
+
+/* general controllers */
+require_once 'module/general/controllers/MenuTree.php';
 
 /* root */
 require_once 'Router.php';

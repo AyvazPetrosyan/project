@@ -1,9 +1,11 @@
 <?php
+
 namespace engine;
 
 use engine\Project;
 
-class ParentController extends Project {
+class ParentController extends Project
+{
 
     protected $projectInfo;
 
@@ -16,25 +18,25 @@ class ParentController extends Project {
         $this->assignParams['moduleName'] = $projectInfo['moduleName'];
 
         $rootDir = $projectInfo['rootDir'];
+
         $this->assignParams['topBarMenuTree'] = [
-            'main'=>['menu'=>FALSE, 'href'=>"/$rootDir/admin", 'name'=>'Գլխավոր'],
-            'settings'=>[
-                'menu'=>TRUE,
-                'name'=>'Settings',
-                'history'=>[
-                    'menu'=>TRUE,
-                    'name'=>'History',
-                    'history1'=>['menu'=>FALSE, 'href'=>'/$rootDir/admin/Senders', 'name'=>'history 1'
-                    ]
+            'main' => ['menu' => FALSE, 'href' => "/$rootDir/admin", 'name' => 'Գլխավոր'],
+            'settings' => [
+                'menu' => TRUE,
+                'name' => 'Settings',
+                'history' => [
+                    'menu' => TRUE,
+                    'name' => 'History',
+                    'history1' => ['menu' => FALSE, 'href' => '/$rootDir/admin/Senders', 'name' => 'history 1']
                 ],
-                'install'=>['menu'=>FALSE, 'href'=>"/$rootDir/admin/Install", 'name'=>'install']
+                'install' => ['menu' => FALSE, 'href' => "/$rootDir/admin/Install", 'name' => 'install']
             ],
-            'senders'=>['menu'=>FALSE, 'href'=>"/$rootDir/admin/Senders", 'name'=>'Առաքիչներ'],
-            'bread'  =>['menu'=>FALSE, 'href'=>"/$rootDir/admin/Bread",   'name'=>'Bread'    ]
+            'senders' => ['menu' => FALSE, 'href' => "/$rootDir/admin/Senders", 'name' => 'Առաքիչներ'],
+            'bread' => ['menu' => FALSE, 'href' => "/$rootDir/admin/Bread", 'name' => 'Bread']
         ];
     }
 
-    protected function redirectToController($moduleName='frontend', $controllerName='Index', $actionName="index", $paramKey=null, $paramVal=null)
+    protected function redirectToController($moduleName = 'frontend', $controllerName = 'Index', $actionName = "index", $paramKey = null, $paramVal = null)
     {
         $rootDir = $this->projectInfo['rootDir'];
         $url = "$rootDir/$moduleName/$controllerName/$actionName/$paramKey/$paramVal";
