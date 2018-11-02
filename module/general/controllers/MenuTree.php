@@ -27,5 +27,7 @@ class MenuTree extends ParentController
             'senders' => ['menu' => FALSE, 'href' => "/$rootDir/admin/Senders", 'name' => 'Առաքիչներ'],
             'bread' => ['menu' => FALSE, 'href' => "/$rootDir/admin/Bread", 'name' => 'Bread']
         ];
+
+        new ViewManager($this->assignParams);
     }
 }
