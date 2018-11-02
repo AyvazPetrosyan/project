@@ -43,7 +43,7 @@ class SenderDetail extends ParentController{
         $senderId = $this->projectInfo['params']['id'];
         $this->assignParams['senderDetailMenuTreeList'] = $menuTree->generateSendersDetailMenuTreeList($senderId);
 
-        $this->assignParams['breadsTableForm'] = $this->generateBreadsTableForm();
+        $this->assignParams['breadsTableForm'] = $this->generateBreadsTableForm($senderId);
 
         new ViewManager($this->assignParams);
     }
@@ -51,7 +51,7 @@ class SenderDetail extends ParentController{
     public function addBreadAction()
     {
         $sqlConfig  = $this->projectInfo['sqlConfig'];
-        $senderId = $this->projectInfo['params']['id'];
+        $senderId = $this->projectInfo['params']['post']['senderId'];
         $breadId  = $this->projectInfo['params']['post']['breadId'];
         $breadPrice = $this->projectInfo['params']['post']['breadPrice'];
 
@@ -64,7 +64,7 @@ class SenderDetail extends ParentController{
         $query = new Query($sqlConfig);
         $query->addIntoTable('senders_breads_relation',$insertList);
 
-//        $this->redirectToController('admin', 'SenderDetail', 'breads');
+        $this->redirectToController('admin', 'SenderDetail', 'breads');
     }
 
     public function historyAction()
@@ -78,7 +78,7 @@ class SenderDetail extends ParentController{
         $this->redirectToController('admin', 'SenderDetail');
     }
 
-    private function generateBreadsTableForm()
+    private function generateBreadsTableForm($senderId)
     {
         $rootDir = $this->projectInfo['rootDir'];
         $tableInfo = $this->assignParams['breadsTableInfo'];
@@ -94,7 +94,7 @@ class SenderDetail extends ParentController{
                 }
                 $tableForm .= "</select></td>";
             } elseif($infoVal == 'price') {
-                $tableForm .= "<td><input type='number' min='10' name='breadPrice' placeholder='$infoVal' required='required'></td>";
+                $tableForm .= "<td><input type='hidden' name='senderId' value='$senderId' /><input type='number' min='10' name='breadPrice' placeholder='$infoVal' required='required'></td>";
             } else {
                 $tableForm .= "<td><input type='text' name=$infoKey.'_name' placeholder='$infoVal' required='required'></td>";
             }
@@ -103,7 +103,6 @@ class SenderDetail extends ParentController{
         $tableForm .= "</form>";
 
         return $tableForm;
-
     }
 
     private function getBreads()
